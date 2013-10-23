@@ -18,7 +18,7 @@ public class Author {
 	/**
 	 * Stores the list of an author's publications 
 	 */
-	private ArrayList<Paper> publications;
+	private ArrayList<Paper> publications = new ArrayList<Paper>();
 
 	/**
 	 * @return The author's full name 
@@ -31,7 +31,7 @@ public class Author {
 	 * @return The list of publications associated with the author
 	 */
 	public ArrayList<Paper> getPublications() {
-		return null;
+		return publications;
 	}
 	
 	public void addPublication(Paper p){

@@ -83,6 +83,9 @@ public class PaperDatabase {
 		p = new Paper(tempInfo);
 		tempInfo.clear();
 		paperList.add(p);
+		for(Paper aper : paperList){
+			authorLoad(aper);
+		}
 		}
 	/**
 	 * <P>
@@ -222,6 +225,10 @@ public class PaperDatabase {
 				authorHash.put(s, a);
 			}
 		}
+	}
+	
+	public Author getAuthor(String name){
+		return authorHash.get(name);
 	}
 
 

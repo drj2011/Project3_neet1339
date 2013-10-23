@@ -1,18 +1,20 @@
+import java.io.IOException;
+
 
 public class ScholarPubMVC {
 
 
-	static ScholarPubInputWindow inputWindow = new ScholarPubInputWindow();
-
-	static ScholarPubModel model = new ScholarPubModel();
-	static ScholarPubView view = new ScholarPubView(model);
-	static ScholarPubController controller = new ScholarPubController(model, view);
 	
-	public static void main(String[] args){
+	
+	public static void main(String[] args) throws IOException{
 
+		ScholarPubInputWindow inputWindow = new ScholarPubInputWindow();
+
+		ScholarPubModel model = new ScholarPubModel();
+		ScholarPubView view = new ScholarPubView(model);
+		ScholarPubController controller = new ScholarPubController(model, view);
 		
-		inputWindow.setVisible(true);
-		inputWindow.isVisible();
+		
 
 	}
 

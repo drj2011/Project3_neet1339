@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
-
+import java.io.*;
 
 /**
  * <P>
@@ -10,7 +10,7 @@ import java.util.Comparator;
  * of the variables of the object type Paper.
  * </P>
  */
-public class Paper implements Comparable<Paper>{
+public class Paper implements Comparable<Paper>, Serializable{
 
 	/**
 	 * Stores the type of the paper.
