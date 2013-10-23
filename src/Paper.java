@@ -3,7 +3,6 @@ import java.util.Calendar;
 import java.util.Comparator;
 
 
-
 /**
  * <P>
  * A class used to create a Paper object.  It can construct a Paper
@@ -164,7 +163,10 @@ public class Paper implements Comparable<Paper>{
 
 		return all;
 	}
-
+	
+	public ArrayList<String> getAuthors(){
+		return authorList;
+	}
 	/**
 	 * @param p - The paper to be compared.
 	 * @return The method will return -1 if the object should go before

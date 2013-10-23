@@ -2,7 +2,9 @@ import java.util.ArrayList;
 
 public class Author {
 
-
+	public Author(){
+		
+	}
 	/**
 	 * Stores an Author's first name
 	 */
@@ -31,5 +33,13 @@ public class Author {
 	public ArrayList<Paper> getPublications() {
 		return null;
 	}
-
+	
+	public void addPublication(Paper p){
+		publications.add(p);
+	}
+	
+	public void setName(String[] names){
+		firstName = names[1];
+		lastName = names[0];
+	}
 }

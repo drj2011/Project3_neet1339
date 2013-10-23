@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -19,7 +20,7 @@ import java.util.Random;
 public class PaperDatabase {
 
 	private ArrayList<Paper> paperList = new ArrayList<Paper>();
-
+	private HashMap<String, Author> authorHash = new HashMap<String, Author>();
 
 	/**
 	 * <P>
@@ -206,7 +207,22 @@ public class PaperDatabase {
 		paperList = (ArrayList<Paper>) in.readObject();
 		in.close();
 	}
-
+	
+	public void authorLoad(Paper p){
+		ArrayList<String> authorString = new ArrayList<String>();
+		authorString = p.getAuthors();
+		for(String s : authorString){
+			if(authorHash.containsKey(s)){
+				authorHash.get(s).addPublication(p);
+			}else{
+				Author a = new Author();	//Creates a temporary author, adds the publication to it, and adds it to the hashmap
+				String[] names = s.split(", ");  //Turns (Signomen, Cognomen) into [Signomen Cognomen]
+				a.addPublication(p);
+				a.setName(names);
+				authorHash.put(s, a);
+			}
+		}
+	}
 
 
 
