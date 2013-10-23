@@ -163,7 +163,10 @@ public class Paper implements Comparable<Paper>, Serializable{
 
 		return all;
 	}
-	
+	/**
+	 * Getter for the list of authors
+	 * @return
+	 */
 	public ArrayList<String> getAuthors(){
 		return authorList;
 	}

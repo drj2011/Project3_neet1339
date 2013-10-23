@@ -1,9 +1,13 @@
+import java.awt.BorderLayout;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 
 /**
@@ -197,6 +201,12 @@ public class PaperDatabase {
 		
 		bw.close();
 	}
+	/**
+	 * Writes the ArrayList paperList to a user-specified file name
+	 * 
+	 * @param fileName	The file the user wants to write to.
+	 * @throws IOException
+	 */
 	public void binaryFileWriter(String fileName) throws IOException{
 		FileOutputStream fileOut = new FileOutputStream(fileName);
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -204,13 +214,23 @@ public class PaperDatabase {
 		out.close();
 		fileOut.close();
 	}
+	/**
+	 * Reads in the serialized arrayList paperList and updates the database
+	 * 
+	 * @param fileName	The file to read from
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@SuppressWarnings("unchecked")
 	public void binaryFileReader(String fileName) throws IOException, ClassNotFoundException{
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
 		paperList = (ArrayList<Paper>) in.readObject();
 		in.close();
 	}
-	
+	/**
+	 * Creates a hashmap of Strings pointing to Authors.  Also, Associates papers with specific authors
+	 * @param p	The paper to get authors from
+	 */
 	public void authorLoad(Paper p){
 		ArrayList<String> authorString = new ArrayList<String>();
 		authorString = p.getAuthors();
@@ -219,19 +239,34 @@ public class PaperDatabase {
 				authorHash.get(s).addPublication(p);
 			}else{
 				Author a = new Author();	//Creates a temporary author, adds the publication to it, and adds it to the hashmap
-				String[] names = s.split(", ");  //Turns (Signomen, Cognomen) into [Signomen Cognomen]
+				String[] names = s.split(", ");  //Turns (Last Name, First Name) into [Last Name First Name]
 				a.addPublication(p);
 				a.setName(names);
 				authorHash.put(s, a);
 			}
 		}
 	}
-	
+	/**
+	 * Uses the hashmap to get an author from the name
+	 * @param name	The string key
+	 * @return	Returns the Author object corresponding to the key
+	 */
 	public Author getAuthor(String name){
 		return authorHash.get(name);
 	}
+	/**
+	 * Nonfunctioning GUI stuff.  Frankly, I have no clue what to do about the graphs.
+	 * @param aName
+	 * @param type
+	 */
+	public void showGraph(String aName, String type){
+		JFrame frame = new JFrame("aName");
+		JLabel gTypeLabel = new JLabel(type);
+		frame.getContentPane().add(gTypeLabel, BorderLayout.CENTER);
+		frame.pack();
+		frame.setVisible(true);
 
-
+	}
 
 
 

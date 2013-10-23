@@ -33,11 +33,17 @@ public class Author {
 	public ArrayList<Paper> getPublications() {
 		return publications;
 	}
-	
+	/**
+	 * Adds a paper to the ArrayList of papers associated with the author
+	 * @param p	The paper to add
+	 */
 	public void addPublication(Paper p){
 		publications.add(p);
 	}
-	
+	/**
+	 * Sets the first and last names of the author
+	 * @param names	An array of the last name and first name.  It was easier to do it this way.
+	 */
 	public void setName(String[] names){
 		firstName = names[1];
 		lastName = names[0];
