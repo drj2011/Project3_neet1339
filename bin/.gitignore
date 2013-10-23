@@ -14,3 +14,6 @@
 /ScholarPubMVC.class
 /ScholarPubModel.class
 /ScholarPubView.class
+/ScholarPubController$SortBiblioListener.class
+/ScholarPubController$SortBIButtonListener.class
+/ScholarPubController$mainSortButtonListener.class

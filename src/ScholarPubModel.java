@@ -1,33 +1,29 @@
-import java.io.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Random;
 
 
-public class ScholarPubModel {
 
-	private ArrayList<Paper> paperList = new ArrayList<Paper>();
-	private HashMap<String, Author> authorHash = new HashMap<String, Author>();
-	PaperDatabase database = new PaperDatabase();
-
-	/**
-	 * <P>
-	 * A constructor for an object type ScholarPubModel.
-	 * <P> 
-	 */
-	public ScholarPubModel() {
-		
-	}
+public class ScholarPubModel  {
 	
 	/**
-	 * <P>
-	 * Used to create the paper database that is used throughout the program.
-	 * </P>
-	 * 
-	 * @throws IOException
+	 * List to keep track of who is registered to listen for events from the academicPapersModel.
 	 */
+	private ArrayList<ActionListener> actionListenerList;
+	private ArrayList<Paper> paperList = new ArrayList<Paper>();
+	PaperDatabase database = new PaperDatabase();
+
+
+
+	public ScholarPubModel() {
+
+	}
+	
 	public void fillDirectory() throws IOException{
 		BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 		//System.out.println("Where is the .txt file containing the located?");
@@ -73,7 +69,12 @@ public class ScholarPubModel {
 		p = new Paper(tempInfo);
 		tempInfo.clear();
 		paperList.add(p);
+		for (Paper x : paperList) {
+			System.out.println(x.getAll());
 		}
+	
+		}
+
 	/**
 	 * <P>
 	 * Sorts the PaperDatabase how the user chooses.  Uses Collections interface.
@@ -93,56 +94,6 @@ public class ScholarPubModel {
 		}
 
 		
-	}
-
-
-	/**
-	 * <P>
-	 * Searches the PaperDatabase for the paper with the title given.  This is a linear search
-	 * <P> 
-	 * 
-	 * @param userInput - Name of the paper to search for.
-	 */
-	public void search(String userInput) {
-		ArrayList<Paper> searchResults = new ArrayList<Paper>();
-		for (int i = 0; i < paperList.size(); i++) {
-			for(int j = 0; j < 6; j++){
-				if(paperList.get(i).getInfo(j).toLowerCase().contains(userInput.toLowerCase())){
-					searchResults.add(paperList.get(i));
-					break;
-
-				}
-			}
-		}
-		for (Paper p : searchResults) {
-			System.out.println(p.getInfo(0) + "\n" + p.getInfo(1) + "\n" + p.getInfo(2) +
-					"\n" + p.getInfo(3) + "\n" + p.getInfo(4) + "\n" + p.getInfo(5));
-			if(!p.getInfo(6).equals("")){
-				System.out.println(p.getInfo(6));
-			}
-			System.out.println("");
-		}
-	}
-	/**
-	 * This method uses Collections to search with a binary search based on search type and a key
-	 * 
-	 * @param searchType	How to search, either by Paper Title (PT) or Serial Title (ST)
-	 * @param key			The string to search for
-	 */
-	public void binarySearch(String searchType, String key){
-		ArrayList<String> biSearch = new ArrayList<String>();
-		if(searchType.equals("PT")){
-			for(Paper p : paperList){
-				biSearch.add(p.getInfo(2));
-			}
-		}else{
-			for(Paper p : paperList){
-				biSearch.add(p.getInfo(3));
-			}		}
-		int index = Collections.binarySearch(biSearch,key);
-		if(index >= 0){
-			System.out.println(paperList.get(index).getAll());
-		}
 	}
 
 	/** 
@@ -166,56 +117,26 @@ public class ScholarPubModel {
 		}
 		
 	}
-	
+
+
 	/**
-	 * Writes the file in the specified format.
-	 * 
-	 * @param fileName		The file name to write to
-	 * @throws IOException
+	 * Go through the list of ActionListeners and inform each of the ActionEvent e.
+	 * Note that we first make a copy of the list and then go through the copy of the list.
+	 * We make the copy in a synchronized block to ensure that the list isn't modified during
+	 * the copy operation.
 	 */
-	public void fileWriter(String fileName) throws IOException{
-		FileWriter outfile = new FileWriter(fileName);
-		BufferedWriter bw = new BufferedWriter(outfile);
-		for (Paper p : paperList) {
-			bw.write(p.getAll());
-			bw.newLine();
+	private void processEvent(ActionEvent e) {
+		ArrayList<ActionListener> list;
+		
+		synchronized (this) {
+			if (actionListenerList == null) return;
+			list = (ArrayList<ActionListener>)actionListenerList.clone();
 		}
 		
-		
-		bw.close();
-	}
-	public void binaryFileWriter(String fileName) throws IOException{
-		FileOutputStream fileOut = new FileOutputStream(fileName);
-		ObjectOutputStream out = new ObjectOutputStream(fileOut);
-		out.writeObject(paperList);
-		out.close();
-		fileOut.close();
-	}
-	@SuppressWarnings("unchecked")
-	public void binaryFileReader(String fileName) throws IOException, ClassNotFoundException{
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
-		paperList = (ArrayList<Paper>) in.readObject();
-		in.close();
-	}
-	
-	public void authorLoad(Paper p){
-		ArrayList<String> authorString = new ArrayList<String>();
-		authorString = p.getAuthors();
-		for(String s : authorString){
-			if(authorHash.containsKey(s)){
-				authorHash.get(s).addPublication(p);
-			}else{
-				Author a = new Author();	//Creates a temporary author, adds the publication to it, and adds it to the hashmap
-				String[] names = s.split(", ");  //Turns (Signomen, Cognomen) into [Signomen Cognomen]
-				a.addPublication(p);
-				a.setName(names);
-				authorHash.put(s, a);
-			}
+		for (int i = 0; i < list.size(); i++) {
+			ActionListener listener = list.get(i);
+			listener.actionPerformed(e);
 		}
 	}
-
-
-
-
 	
 }
