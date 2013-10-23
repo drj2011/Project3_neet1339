@@ -1,0 +1,6 @@
+Milestone 1+2:  The project can save and load the ArrayList object that holds all the papers.
+Milestone 3:  There is no functioning GUI.  We tried to come during office hours on Wednesday for advice, but Professor Hougen wasn't there.
+Milestone 4:  We have an Author class that stores first and last names, as well as an arraylist of papers that he or she is listed as an author in. 
+Milestone 5:  We have a hashmap of String keys that points to Author object values, and it is implemented in our program.
+Milestone 6:  We wrote a method to go through each Paper object in the database, scrape and parse the author names, and either create a new author if
+there is no author by that name, or add the paper to the author object.
