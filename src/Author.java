@@ -21,13 +21,6 @@ public class Author {
 	private ArrayList<Paper> publications = new ArrayList<Paper>();
 
 	/**
-	 * @return The author's full name 
-	 */
-	public String getFullName() {
-		return null;
-	}
-
-	/**
 	 * @return The list of publications associated with the author
 	 */
 	public ArrayList<Paper> getPublications() {

@@ -63,7 +63,7 @@ public class ScholarPub {
 					"CH to sort chronologically." + "\n" + "R to sort randomly." + "\n" + 
 					"PS to print to screen." + "\n" + "PF to print to a text file." + "\n" +
 					"SV to print to a binary file." + "\n" + "LDB to load from a binary file." + "\n" + "LDT to load from a text file" +  "\n" +
-					"S to search the collection." + "\n" + "G to output data to a graph (nonfunctional)" + "E to exit.");
+					"S to search the collection." + "\n" + "G to output data to a graph (nonfunctional)" + "\n" + "E to exit.");
 
 			String userText = inputReader.readLine();
 

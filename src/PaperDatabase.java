@@ -1,11 +1,17 @@
 import java.awt.BorderLayout;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Random;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -44,9 +50,8 @@ public class PaperDatabase {
 	 */
 	public void fillDirectory() throws IOException{
 		BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-		//System.out.println("Where is the .txt file containing the located?");
-		//String fileLocation = inputReader.readLine();
-		String fileLocation = "p.txt";
+		System.out.println("Where is the .txt file containing the located?");
+		String fileLocation = inputReader.readLine();
 		FileReader fr = new FileReader(fileLocation);
 		BufferedReader br = new BufferedReader(fr);
 		ArrayList<String> paperData = new ArrayList<String>();
@@ -90,6 +95,7 @@ public class PaperDatabase {
 		for(Paper aper : paperList){
 			authorLoad(aper);
 		}
+		br.close();
 		}
 	/**
 	 * <P>
