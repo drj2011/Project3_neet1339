@@ -1,9 +1,4 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -198,7 +193,19 @@ public class PaperDatabase {
 		
 		bw.close();
 	}
-
+	public void binaryFileWriter(String fileName) throws IOException{
+		FileOutputStream fileOut = new FileOutputStream(fileName);
+		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		out.writeObject(paperList);
+		out.close();
+		fileOut.close();
+	}
+	@SuppressWarnings("unchecked")
+	public void binaryFileReader(String fileName) throws IOException, ClassNotFoundException{
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
+		paperList = (ArrayList<Paper>) in.readObject();
+		in.close();
+	}
 
 
 
