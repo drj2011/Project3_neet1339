@@ -1,4 +1,9 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -14,6 +19,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 /**
@@ -49,10 +55,11 @@ public class PaperDatabase {
 	 * @throws IOException
 	 */
 	public void fillDirectory() throws IOException{
-		BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Where is the .txt file containing the located?");
-		String fileLocation = inputReader.readLine();
-		FileReader fr = new FileReader(fileLocation);
+		//BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+		//System.out.println("Where is the .txt file containing the located?");
+		//String fileLocation = inputReader.readLine();
+		
+		FileReader fr = new FileReader("p.txt");
 		BufferedReader br = new BufferedReader(fr);
 		ArrayList<String> paperData = new ArrayList<String>();
 		String[] pData;
@@ -266,14 +273,45 @@ public class PaperDatabase {
 	 * @param type
 	 */
 	public void showGraph(String aName, String type){
-		JFrame frame = new JFrame("aName");
-		JLabel gTypeLabel = new JLabel(type);
-		frame.getContentPane().add(gTypeLabel, BorderLayout.CENTER);
+		ArrayList<Paper> temp = new ArrayList<Paper>();
+		int journalCounter = 0;
+		int confCounter = 0;
+		int biggestCounter = 0;
+		if(type.equalsIgnoreCase("tp")){
+			temp = authorHash.get(aName).getPublications();
+			for (Paper p : temp) {
+				if(p.getInfo(0).equalsIgnoreCase("Journal Article")){
+					journalCounter++;
+				} else if(p.getInfo(0).equalsIgnoreCase("Conference Paper")){
+					confCounter++;
+				}
+				
+			}
+			System.out.println(journalCounter);
+			if(journalCounter > confCounter){
+				biggestCounter = journalCounter;
+			} else {
+				biggestCounter = confCounter;
+			}
+		}
+		
+		int xValue = 400;
+		int yValue = 800;
+		Dimension preferredSize = new Dimension(xValue,yValue);
+	
+
+		JFrame frame = new JFrame(aName);
+		frame.setPreferredSize(preferredSize);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Painter p = new Painter(xValue, yValue, journalCounter, confCounter);
+		frame.add(p);
 		frame.pack();
 		frame.setVisible(true);
 
 	}
 
+	
+	
 
 
 }

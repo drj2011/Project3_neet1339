@@ -49,7 +49,7 @@ public class ScholarPub {
 		PaperDatabase database = new PaperDatabase();
 		database.fillDirectory();
 
-		int userOption = -1;
+		int userOption = 12;
 
 		BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -63,7 +63,7 @@ public class ScholarPub {
 					"CH to sort chronologically." + "\n" + "R to sort randomly." + "\n" + 
 					"PS to print to screen." + "\n" + "PF to print to a text file." + "\n" +
 					"SV to print to a binary file." + "\n" + "LDB to load from a binary file." + "\n" + "LDT to load from a text file" +  "\n" +
-					"S to search the collection." + "\n" + "G to output data to a graph (nonfunctional)" + "\n" + "E to exit.");
+					"S to search the collection." + "\n" + "G to output data to a graph" + "\n" + "E to exit.");
 
 			String userText = inputReader.readLine();
 
@@ -166,8 +166,8 @@ public class ScholarPub {
 				database.fileWriter(JOptionPane.showInputDialog("Name your output file"));
 			}else if(userOption == 12){
 				String aName = JOptionPane.showInputDialog("What is the name of the author?");
-				String type = JOptionPane.showInputDialog("select ‘TP’ for type of publication, ‘PY’ for publications per year, " + "\n" + "‘CPY’ for conference papers per year, ‘JAY’ for journal articles per year," + "\n" + " or ‘NC’ for number of co-authors per publication.");
-				database.showGraph(aName, type);
+				String type = JOptionPane.showInputDialog("select 'TP' for type of publication, 'PY' for publications per year, " + "\n" + "'CPY' for conference papers per year, 'JAY' for journal articles per year," + "\n" + " or 'NC' for number of co-authors per publication.");
+					database.showGraph(aName, type);
 			}
 
 		}
