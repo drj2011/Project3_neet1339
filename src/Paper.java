@@ -210,9 +210,6 @@ public class Paper implements Comparable<Paper>, Serializable{
 			if(p1Authors.length < p2Authors.length)
 			{
 				for (int i = 0; i < p1Authors.length; i++) {
-					System.out.println(p1Authors[i]);
-					System.out.println(p2Authors[i]);
-					System.out.println(p1Authors[i].compareTo(p2Authors[i]));
 					if(p1Authors[i].compareTo(p2Authors[i]) < 0){
 						return -1;
 					} else if (p1Authors[i].compareTo(p2Authors[i]) > 0){

@@ -55,11 +55,11 @@ public class PaperDatabase {
 	 * @throws IOException
 	 */
 	public void fillDirectory() throws IOException{
-		//BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-		//System.out.println("Where is the .txt file containing the located?");
-		//String fileLocation = inputReader.readLine();
+		BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Where is the .txt file containing the located?");
+		String fileLocation = inputReader.readLine();
 		
-		FileReader fr = new FileReader("p.txt");
+		FileReader fr = new FileReader(fileLocation);
 		BufferedReader br = new BufferedReader(fr);
 		ArrayList<String> paperData = new ArrayList<String>();
 		String[] pData;
@@ -287,8 +287,7 @@ public class PaperDatabase {
 				}
 				
 			}
-			System.out.println(journalCounter);
-			if(journalCounter > confCounter){
+if(journalCounter > confCounter){
 				biggestCounter = journalCounter;
 			} else {
 				biggestCounter = confCounter;
