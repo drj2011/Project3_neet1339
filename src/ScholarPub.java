@@ -36,11 +36,6 @@ public class ScholarPub {
 	 * @throws ClassNotFoundException 
 	 * @throws HeadlessException 
 	 */
-
-
-
-
-
 	public static void main(String[] args) throws IOException, HeadlessException, ClassNotFoundException{
 
 		/**

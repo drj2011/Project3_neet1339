@@ -285,19 +285,19 @@ public class PaperDatabase {
 				} else if(p.getInfo(0).equalsIgnoreCase("Conference Paper")){
 					confCounter++;
 				}
-				
+
 			}
-if(journalCounter > confCounter){
+			if(journalCounter > confCounter){
 				biggestCounter = journalCounter;
 			} else {
 				biggestCounter = confCounter;
 			}
 		}
-		
+
 		int xValue = 400;
 		int yValue = 800;
 		Dimension preferredSize = new Dimension(xValue,yValue);
-	
+
 
 		JFrame frame = new JFrame(aName);
 		frame.setPreferredSize(preferredSize);
@@ -309,8 +309,8 @@ if(journalCounter > confCounter){
 
 	}
 
-	
-	
+
+
 
 
 }
